@@ -1,0 +1,461 @@
+body {
+    background: #5c1797;
+    background-size: 400% 400%;
+    animation: gradientFlow 15s ease infinite;
+    color: #eee;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+
+#start-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2000;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 1s ease-in-out;
+    background: #fff; 
+}
+
+.thumbnail-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+
+.overlay {
+    position: relative;
+    text-align: center;
+    color: #333;
+}
+
+#start-gif {
+    max-width: 200px;
+    margin-bottom: 20px;
+}
+
+#start-screen h1 {
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    font-size: 2.8em;
+    margin: 0;
+    color: #333;
+}
+
+
+#start-screen h1 .highlight {
+    color: #7b1e5e; 
+    font-weight: bold;
+}
+
+
+#start-screen .subtitle {
+    font-size: 1em;
+    color: #5b0935; 
+    margin: 10px 20px;
+}
+
+.buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: center;
+}
+
+.buttons button {
+    padding: 10px 25px;
+    font-size: 1em;
+    border-radius: 25px;
+    background: transparent;
+    cursor: pointer;
+    transition: 0.3s ease;
+    font-weight: bold;
+}
+
+#yes-btn {
+    border: 2px solid #7b1e5e;
+    color: #7b1e5e;
+}
+
+#yes-btn:hover {
+    background: #7b1e5e;
+    color: #fff;
+}
+
+#no-btn {
+    border: 2px solid #555;
+    color: #555;
+}
+
+#start-screen.hidden {
+    opacity: 0;
+    pointer-events: none;
+    display: none;  
+}
+
+
+#info-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2000;
+  overflow-y: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.8s ease-in-out; 
+  opacity: 1;
+}
+
+#info-screen.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+
+#info-screen .overlay {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: #5b0935; 
+  background: rgba(255, 255, 255, 0.9); 
+  padding: 30px;
+  border-radius: 25px;
+  max-width: 500px;
+  width: 90%;
+  border: 4px dashed #a34c7f; 
+  box-shadow: 0 0 25px rgba(123, 30, 94, 0.4); 
+  font-family: 'Patrick Hand', cursive;
+}
+
+
+#info-gif {
+  max-width: 200px;
+  margin-bottom: 15px;
+}
+
+#info-screen h1 {
+  font-family: 'Comic Neue', cursive;
+  font-size: 2.5em;
+  margin-bottom: 10px;
+  color: #7b1e5e; 
+  text-shadow: 0 0 6px rgba(91, 9, 53, 0.3); 
+}
+
+#start-game-btn {
+  padding: 12px 25px;
+  font-size: 1.1em;
+  border-radius: 30px;
+  border: 2px solid #a34c7f; 
+  background: rgba(248, 214, 224, 0.7); 
+  color: #5b0935; 
+  cursor: pointer;
+  font-family: 'Patrick Hand', cursive;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 15px rgba(123, 30, 94, 0.3);
+}
+
+#start-game-btn:hover {
+  background: #7b1e5e; 
+  color: #fff;
+  box-shadow: 0 0 20px rgba(123, 30, 94, 0.6);
+}
+
+canvas {
+    background: rgba(255, 230, 235, 0.85); 
+    border: 3px solid #fff;
+    box-shadow: 0 0 20px rgba(255, 105, 180, 0.7);
+    border-radius: 15px;
+    image-rendering: pixelated;
+    backdrop-filter: blur(3px); 
+}
+
+
+#win-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.5);
+    opacity: 0;
+    z-index: 1000;
+    transition: opacity 0.8s ease-in-out, transform 0.8s ease-in-out;
+    font-family: 'Press Start 2P', monospace;
+    text-align: center;
+}
+
+#win-message.visible {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+.chat-box {
+    display: flex;
+    align-items: center; 
+    background: #222;
+    border: 4px solid #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(255, 105, 180, 0.7);
+    max-width: 450px;
+    min-height: 140px; 
+}
+
+.char-img {
+    width: 100px;
+    height: auto;
+    image-rendering: pixelated;
+    object-fit: contain;
+}
+
+
+.chat-text {
+    color: #fff;
+    font-size: 14px;
+    line-height: 1.4;
+    flex: 1;
+    text-align: left;
+}
+
+.chat-text .name {
+    color: #ff8fab;
+    margin-bottom: 5px;
+    font-weight: bold;
+    font-size: 12px;
+}
+
+.chat-text .dialogue {
+    font-size: 12px;
+    white-space: pre-line;
+}
+
+#win-message button {
+    margin-top: 15px;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    background: #ff8fab;
+    color: white;
+    font-size: 12px;
+    cursor: pointer;
+    font-family: 'Press Start 2P', monospace;
+    transition: 0.2s;
+}
+
+#win-message button:hover {
+    background: #e63946;
+}
+
+
+
+
+
+@keyframes floatHearts {
+    from { transform: translateX(-50%) translateY(0); }
+    to { transform: translateX(-50%) translateY(-20px); }
+}
+
+
+#win-message.visible {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+}
+
+#win-message.hidden {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.5);
+}
+
+#game-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+#controls {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+#controls .middle {
+    display: flex;
+    gap: 10px;
+}
+
+#controls button {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5em;
+    border-radius: 15px;
+    border: none;
+    background: #7b2cbf;  
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 0 10px rgba(123, 44, 191, 0.6); 
+    transition: 0.2s;
+}
+
+#controls button:active {
+    background: #9d4edd; 
+}
+
+
+
+#romantic-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 0; 
+}
+
+.heart {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    background: pink;
+    clip-path: polygon(
+        50% 0%,
+        61% 10%,
+        75% 0,
+        100% 25%,
+        50% 100%,
+        0 25%,
+        25% 0,
+        39% 10%
+    );
+    opacity: 0.8;
+    animation: fall 8s linear infinite;
+}
+
+.heart:nth-child(1) { left: 10%; animation-duration: 6s; }
+.heart:nth-child(2) { left: 30%; animation-duration: 7s; }
+.heart:nth-child(3) { left: 50%; animation-duration: 9s; }
+.heart:nth-child(4) { left: 70%; animation-duration: 5s; }
+.heart:nth-child(5) { left: 90%; animation-duration: 8s; }
+
+@keyframes fall {
+    0% { transform: translateY(-10vh) scale(1); opacity: 1; }
+    100% { transform: translateY(110vh) scale(0.5); opacity: 0; }
+}
+
+.sparkle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background: gold;
+    border-radius: 50%;
+    opacity: 0.7;
+    animation: twinkle 3s infinite alternate;
+}
+
+.sparkle:nth-child(6) { top: 20%; left: 40%; }
+.sparkle:nth-child(7) { top: 60%; left: 70%; }
+
+@keyframes twinkle {
+    from { transform: scale(0.5); opacity: 0.3; }
+    to { transform: scale(1.5); opacity: 1; }
+}
+
+#moon-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: black;
+  transition: opacity 1s ease-in-out;
+  opacity: 0;
+  pointer-events: none;
+}
+
+#moon-page.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.moon-full {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+#moon-page img {
+  opacity: 1;
+  transition: opacity 1s ease-in-out;
+}
+
+.zoomed {
+  transform: scale(1.2);
+  transition: transform 0.5s ease-in-out;
+}
+
+.moon-restart {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 12px 25px;
+    border: 2px solid #a34c7f;
+    background: transparent;
+    color: #a34c7f;
+    border-radius: 25px;
+    font-family: 'Patrick Hand', cursive;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.moon-restart:hover {
+    background: #a34c7f;
+    color: #fff;
+}
+
+#restart-btn {
+  font-size: 0.9rem;        
+  padding: 6px 14px;        
+  border-radius: 20px;      
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#restart-btn:hover {
+  background-color: #7b2f7a;
+  transform: scale(1.05);
+}
+
+
+
+

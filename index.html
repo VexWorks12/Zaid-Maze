@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maze Game</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="start-screen">
+    <img src="haha.jpg" alt="Background" class="thumbnail-bg">
+
+    <div class="overlay">
+      <img src="cat.gif" alt="Cute Gif" id="start-gif">
+
+      <h1>Hello<br><span class="highlight">My Baby!</span></h1>
+      <p class="subtitle">Do you want to play a game?</p>
+
+      <div class="buttons">
+        <button id="yes-btn">Yes! I want to play, baby</button>
+        <button id="no-btn">No! I don’t want to play</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="info-screen" class="hidden">
+    <img src="haha.jpg" alt="Background" class="thumbnail-bg">
+
+    <div class="overlay">
+      <img src="hehe.gif" alt="Cute Gif" id="info-gif">
+
+      <h1>Game Details 💕</h1>
+      <p class="subtitle">
+        You will play a cute maze game. 💖<br>
+        Reach the end to get your reward!
+      </p>
+      <p class="subtitle">
+        <strong>Reward:</strong> A sweet kiss 😘
+      </p>
+      <p class="subtitle">
+        <strong>How to Play:</strong><br>
+        Use the arrow keys or swipe on mobile to move through the maze and reach the exit.
+      </p>
+      <div class="buttons">
+        <button id="start-game-btn">Start Game 💖</button>
+      </div>
+    </div>
+  </div>
+
+
+  <div id="game-container">
+    <div id="romantic-background">
+      <div class="heart"></div>
+      <div class="heart"></div>
+      <div class="heart"></div>
+      <div class="heart"></div>
+      <div class="heart"></div>
+      <div class="sparkle"></div>
+      <div class="sparkle"></div>
+    </div>
+
+    <canvas id="mazeCanvas"></canvas>
+
+    <div id="controls">
+      <button data-dir="up">⬆️</button>
+      <div class="middle">
+        <button data-dir="left">⬅️</button>
+        <button data-dir="down">⬇️</button>
+        <button data-dir="right">➡️</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="win-message" class="hidden">
+    <div class="chat-box">
+      <img src="him2.png" alt="Player" class="char-img" id="chat-img">
+      <div class="chat-text">
+        <p class="name">Zaid ❤️</p>
+        <p id="dialogue" class="dialogue">“Yay! You did it so easy huh 💕”</p>
+      </div>
+    </div>
+
+    <button id="next-btn">Next ➡️</button>
+  </div>
+
+  <div id="moon-page" class="hidden">
+    <img src="cat1.gif" alt="Moon" class="moon-full">
+    <button id="restart-btn" class="moon-restart">Play Again 💕</button>
+  </div>
+
+  <audio id="moon-music" src="sparks.mp3" preload="auto" loop></audio>
+
+
+  <script src="script.js"></script>
+</body>
+</html>
