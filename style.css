@@ -527,3 +527,8 @@ canvas {
 #tap-to-continue.visible {
     opacity: 1;
 }
+
+#tap-to-continue.hidden {
+    opacity: 0;
+    pointer-events: none; /* Prevent it from blocking interactions */
+}
