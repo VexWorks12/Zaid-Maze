@@ -126,40 +126,45 @@ function drawMaze() {
     for (let col = 0; col < maze[row].length; col++) {
       if (maze[row][col] === 1) {
         const gradient = ctx.createLinearGradient(0, 0, cellSize, cellSize);
-gradient.addColorStop(0, "#4a0030");  
-gradient.addColorStop(0.5, "#650037"); 
-gradient.addColorStop(1, "#8a0e56");   
-ctx.fillStyle = gradient;
-ctx.fillRect(col * cellSize, row * cellSize, cellSize, cellSize);
-
+        gradient.addColorStop(0, "#4a0030");
+        gradient.addColorStop(0.5, "#650037");
+        gradient.addColorStop(1, "#8a0e56");
+        ctx.fillStyle = gradient;
+        ctx.fillRect(col * cellSize, row * cellSize, cellSize, cellSize);
       } else {
-        ctx.fillStyle = "#f8d6e0"; 
+        ctx.fillStyle = "#f8d6e0";
         ctx.fillRect(col * cellSize, row * cellSize, cellSize, cellSize);
       }
     }
   }
 
-    ctx.imageSmoothingEnabled = false;
+
 ctx.drawImage(
   exitImg,
-  14 * cellSize - cellSize * 0.15,  
-  13 * cellSize - cellSize * 0.55,  
-  cellSize * 1.5,  
-  cellSize * 1.8   
+  14 * cellSize - cellSize * 0.15,
+  13 * cellSize - cellSize * 0.55,
+  cellSize * 1.4,
+  cellSize * 1.8
 );
+
+
+
+
+
 }
 
 function drawPlayer() {
-  ctx.imageSmoothingEnabled = false;
+  
 
-  const scale = 1.3; 
+  ctx.imageSmoothingEnabled = false;
+  const scale = 1.3;
   const offset = (cellSize * (scale - 1)) / 2;
-  const lift = 5; 
+  const lift = 5;
 
   ctx.drawImage(
     playerImg,
     player.x * cellSize - offset,
-    player.y * cellSize - offset - lift, 
+    player.y * cellSize - offset - lift,
     cellSize * scale,
     cellSize * scale
   );
@@ -169,13 +174,59 @@ function drawPlayer() {
 
 
 
+
     function checkWin() {
+
+      console.log("Player Position:", player.x, player.y);
+
     if (!gameWon && player.x === 14 && player.y === 13) {
-        gameWon = true;
-        winMessage.classList.remove('hidden');
-        winMessage.classList.add('visible');
+
+        setTimeout(() => {
+            gameWon = true;
+
+            const hugScene = document.getElementById("hug-scene");
+            const winMsg   = document.getElementById("win-message");
+            const hugImage = document.getElementById("hug-image");
+
+            hugScene.classList.remove("hidden");
+            hugScene.classList.add("visible");
+
+setTimeout(() => {
+    hugScene.classList.add("zoom");
+}, 100);
+
+setTimeout(() => {
+    const tapText = document.getElementById("tap-to-continue");
+    tapText.classList.remove("hidden");
+    tapText.classList.add("visible");
+}, 1000); 
+
+document.addEventListener("click", () => {
+    const tapText = document.getElementById("tap-to-continue");
+    if (tapText && tapText.classList.contains("visible")) {
+        tapText.classList.remove("visible");
+        setTimeout(() => {
+            tapText.classList.add("hidden");
+        }, 500);  
+    }
+});
+
+
+
+            hugImage.onclick = () => {
+                hugScene.classList.remove("visible");
+                hugScene.classList.remove("zoom");
+
+                winMsg.classList.remove("hidden");
+                winMsg.classList.add("visible");
+            };
+        }, 200); 
     }
 }
+
+
+
+
 
 
     function movePlayer(e) {
@@ -241,7 +292,8 @@ canvas.addEventListener("touchend", (e) => {
         drawMaze();
         drawPlayer();
         drawParticles();
-        if (!gameWon) requestAnimationFrame(gameLoop);
+        requestAnimationFrame(gameLoop);  
+x
     }
 
     

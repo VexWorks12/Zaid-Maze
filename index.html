@@ -48,6 +48,12 @@
     </div>
   </div>
 
+  <div id="hug-scene" class="hidden">
+    <img src="hug1.png" alt="Hug Scene" id="hug-image">
+</div>
+
+<div id="tap-to-continue" class="hidden">Tap the screen to continue</div>
+
 
   <div id="game-container">
     <div id="romantic-background">
@@ -62,6 +68,10 @@
 
     <canvas id="mazeCanvas"></canvas>
 
+     
+
+
+
     <div id="controls">
       <button data-dir="up">⬆️</button>
       <div class="middle">
@@ -72,7 +82,8 @@
     </div>
   </div>
 
-  <div id="win-message" class="hidden">
+  <div id="win-message" class="hidden" style="z-index: 4000; position: fixed;">
+
     <div class="chat-box">
       <img src="him2.png" alt="Player" class="char-img" id="chat-img">
       <div class="chat-text">
